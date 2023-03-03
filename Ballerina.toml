@@ -1,0 +1,8 @@
+[package]
+org = "madusha"
+name = "data_mapper_usecases"
+version = "0.1.0"
+distribution = "2201.4.0-20230206-091900-3d0899b2"
+
+[build-options]
+observabilityIncluded = true
