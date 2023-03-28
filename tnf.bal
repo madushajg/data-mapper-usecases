@@ -1,14 +1,28 @@
+// type Type1 record {
+//     Type2|string unionVal;
+ //    (Type2|string)[] unionArr;
+    // Type3[]|Type2[] unionArr2;
+    // Type2[] type2Arr;
+    // string str1;
+// };
+
 type Type1 record {
-    Type2|string unionVal;
-    (Type2|string)[] unionArr;
-    Type2[]|string[] unionArr2;
-    Type2[] type2Arr;
-    string str1;
+    Type3[]|Type2[] unionArr2;
 };
 
 type Type2 record {
     string name2;
     string value2;
+};
+
+type Type3 record {
+    string name22;
+    Type4 value22;
+};
+
+type Type4 record {
+    string|int name4;
+    string value4;
 };
 
 type UnionType1 Type1|Type2|string;
@@ -37,22 +51,27 @@ function transformUnionArrayField(InputType input) returns UnionType1[] => [
 function tnf99(InputType inputType) returns Type1 => {
     type2Arr: from var str1Item in inputType.str1
         select {
-            name2: ,
+            name2: str1Item,
             value2:
         },
     unionArr: from var str1Item in inputType.str1
         select ,
     unionArr2: from var str1Item in inputType.str1
-        select ""
+        select {
+            name2: ,
+            value2: {
+                name445: ,
+            }
+        }
 };
 
 function tnf888(InputType InputType) returns Type2|string => {
     name2: ,
     value2:
 };
-
+'
 function transformUnionInlineReturn(InputType input) returns UnionType1|int => {
-    unionVal: ,
+    unionVal: <>{},
     unionArr: ,
     str1: ,
     type2Arr: from var str1Item in input.str1
@@ -75,13 +94,6 @@ function transformPrimitiveArray(InputType input) returns string[] => [
 ];
 
 function tnf99Temp(InputType inputType) returns Type1 => {
-    type2Arr: from var str1Item in inputType.str1
-        select {
-            name2: ,
-            value2:
-        },
-    unionArr: from var str1Item in inputType.str1
-        select ,
     unionArr2: from var str1Item in inputType.str1
         select ""
 };
