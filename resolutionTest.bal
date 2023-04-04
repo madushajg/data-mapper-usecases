@@ -2,14 +2,19 @@ import ballerina/auth;
 import ballerina/jwt;
 import ballerina/email;
 
-function tnf1(Vehicle vehical) returns SUV|HighEndCar => <SUV>{
-    year: vehical.year,
-    model: vehical.model.transmission
+function tnf1(Vehicle vehical) returns SUV|HighEndCar => {
+    model: vehical.category,
+    year: vehical.model.engine
 };
 
-function tnf2(Vehicle vehical) returns SUV|HighEndCar => let var variable1 = "100" in <SUV>{
-        year: vehical.year,
-        model: variable1 + vehical.category // not working
+function tnf1_1(Vehicle vehical) returns SUV|HighEndCar => <TypeA>{
+    model: vehical.category,
+    year: 1996
+};
+
+function tnf2(Vehicle vehical) returns SUV|HighEndCar => let var var1 = "100" in <SUV>{
+        model: var1
+
     };
 
 function tnf3(Vehicle vehical) returns SUV|HighEndCar => {
@@ -22,23 +27,24 @@ function tnf3(Vehicle vehical) returns SUV|HighEndCar => {
 
 function tnf4(Vehicle vehical) returns SUV|HighEndCar => vehical.model;
 
+function tnf41(Vehicle vehical) returns SUV|HighEndCar => <SUV>vehical.model;
+
 function tnf5(Vehicle vehical) returns SUV|HighEndCar => <SUV>{
-    strA: ""
+    strA: vehical.category
 };
 
-function tnf6(Vehicle vehical) returns SUV|HighEndCar[] => <HighEndCar[]>[
+function tnf6(Vehicle vehical) returns SUV[]|HighEndCar[] => <SUV[]>[
     {
-        year: vehical.year,
-        model: {
-            transmission: "",
-            engine: ""
-        }
+        year: ,
+        model: vehical.model.transmission
     },
-    {}
+    {
+        year: vehical.year
+    }
 ];
 
-// When the type is derivable
-function tnf7(Vehicle vehical) returns SUV|HighEndCar[] => [
+// When the type is derivable (need to handle adding new elements)
+function tnf7(Vehicle vehical) returns SUV|HighEndCar[] => <HighEndCar[]>[
     {
         year: vehical.year,
         model: {
@@ -51,7 +57,7 @@ function tnf7(Vehicle vehical) returns SUV|HighEndCar[] => [
 function tnf8(Vehicle vehical) returns HighEndCar[]|HighEndCar[][] => <HighEndCar[][]>[
     [
         {
-            year: ,
+            year: vehical.year,
             model: {
                 transmission: "",
                 engine: ""
@@ -60,32 +66,43 @@ function tnf8(Vehicle vehical) returns HighEndCar[]|HighEndCar[][] => <HighEndCa
     ]
 ];
 
-function tnf9(int x) returns int|float[] => x;
+function tnf9(int x) returns int|float[] => x; // Shouldn't replace the default value when deleting
 
-function tnf10(int x, int y) returns int|float[] => x + y; // not working
+function tnf91(int x) returns int|float[] => [
+    x * 1.0,
+    0
+];
+
+function tnf10(int x, int y) returns int|float[] => let var variable = "a" in <int>(x + y); // Need to handle add type cast for binary expressions
 
 function tnf11(int x) returns email:Options[]|auth:LdapUserStoreConfig[] => <auth:LdapUserStoreConfig[]>[
     {
-        domainName: x
-    },
-    {}
+        connectionName: x
+
+    }
 ];
 
-function tnf12(int x) returns email:Options|auth:LdapUserStoreConfig => <email:Options>{};
+function tnf12(int x) returns email:Options|auth:LdapUserStoreConfig => <email:Options>{
+    sender: x
+};
 
 function tnf13(int x, string y) returns TypeA|TypeB|TypeC|error => {
     strB1: y
 };
 
+function tnf131(int x, string y) returns TypeA|(TypeB|TypeC)[]|TypeB1 => {  // Need to handle union type in array
+
+};
+
 function tnf14(TypeA typeA) returns TypeA|TypeB|TypeC|error => typeA.tb1;
 
 function tnf15(int x) returns TypeA|TypeB|TypeC|error => {
-    strB1: x.toString() // not working
+    strB1: x.toString()
 };
 
 function tnf16(Vehicle vehical) returns (SUV|xml)[] => [];
 
-function tnf17(Vehicle vehical) returns xml[] => [];
+function tnf17(Vehicle vehical) returns xml[]|TypeA[] => [];
 
 type TypeAll TypeA|TypeB;
 

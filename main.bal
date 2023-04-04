@@ -9,10 +9,10 @@ type Car record {
     SUV|HighEndCar vehicle;
 };
 
-type SUV record {
+type SUV record {|
     string model;
     int year;
-};
+|};
 
 type HighEndCar record {
     Model model;
