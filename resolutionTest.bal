@@ -2,9 +2,11 @@ import ballerina/auth;
 import ballerina/jwt;
 import ballerina/email;
 
+function name(TypeA a) returns anydata[] => [];
+
 function tnf1(Vehicle vehical) returns SUV|HighEndCar => {
     model: vehical.category,
-    year: vehical.model.engine
+    year: 1990
 };
 
 function tnf1_1(Vehicle vehical) returns SUV|HighEndCar => <TypeA>{
@@ -40,11 +42,12 @@ function tnf6(Vehicle vehical) returns SUV[]|HighEndCar[] => <SUV[]>[
     },
     {
         year: vehical.year
-    }
+    },
+    {}
 ];
 
 // When the type is derivable (need to handle adding new elements)
-function tnf7(Vehicle vehical) returns SUV|HighEndCar[] => <HighEndCar[]>[
+function tnf7(Vehicle vehical) returns SUV|HighEndCar[] => [
     {
         year: vehical.year,
         model: {
@@ -73,7 +76,7 @@ function tnf91(int x) returns int|float[] => [
     0
 ];
 
-function tnf10(int x, int y) returns int|float[] => let var variable = "a" in <int>(x + y); // Need to handle add type cast for binary expressions
+function tnf10(int x, int y) returns int|float[] => let var variable = "a" in x + y; // Need to handle add type cast for binary expressions
 
 function tnf11(int x) returns email:Options[]|auth:LdapUserStoreConfig[] => <auth:LdapUserStoreConfig[]>[
     {
@@ -86,13 +89,25 @@ function tnf12(int x) returns email:Options|auth:LdapUserStoreConfig => <email:O
     sender: x
 };
 
-function tnf13(int x, string y) returns TypeA|TypeB|TypeC|error => {
-    strB1: y
+function tnf13(int x, string y) returns TypeA|TypeB|TypeC|error => <TypeB1>{
+    strB1: 12
 };
 
-function tnf131(int x, string y) returns TypeA|(TypeB|TypeC)[]|TypeB1 => {  // Need to handle union type in array
+function tnf131(int x, string y) returns TypeA|(TypeB|TypeC)[]|TypeB1 => {
 
 };
+
+function tnf132(int x, string y) returns TypeA|(TypeB|TypeC)[]|TypeB1 => <(TypeB1|TypeB2|TypeC)[]>[
+    {
+        strB1: ""
+    },
+    {
+        strC: ""
+    },
+
+    <TypeB1>{},
+    <TypeB2>{}
+];
 
 function tnf14(TypeA typeA) returns TypeA|TypeB|TypeC|error => typeA.tb1;
 
@@ -124,3 +139,12 @@ type TypeB2 record {
 type TypeC record {
     string strC;
 };
+
+// ######################### Next #########################
+// 1. Need to handle union type in array
+// 2. Need to handle add type cast for binary expressions
+// 3. Need to handle union types in query expressions
+// 4. Add dissabled search for cases where search is not applicable
+// 5. Add a warning when selecting a type 
+// 6. Reduce the gap between search and the top of the page
+// 7. Create an issue to track displaying all the fields available in the source (including invalid fields)
