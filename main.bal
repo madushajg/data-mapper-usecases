@@ -51,7 +51,6 @@ function transform4(HighEndCar car) returns Car => {
     }
 };
 
-
 function transform1Simplified(Vehicle vehical) returns HighEndCar => {
     year: vehical.year,
     model: {

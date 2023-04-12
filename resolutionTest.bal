@@ -2,8 +2,6 @@ import ballerina/auth;
 import ballerina/jwt;
 import ballerina/email;
 
-function name(TypeA a) returns anydata[] => [];
-
 function tnf1(Vehicle vehical) returns SUV|HighEndCar => {
     model: vehical.category,
     year: 1990
@@ -42,12 +40,11 @@ function tnf6(Vehicle vehical) returns SUV[]|HighEndCar[] => <SUV[]>[
     },
     {
         year: vehical.year
-    },
-    {}
+    }
 ];
 
 // When the type is derivable (need to handle adding new elements)
-function tnf7(Vehicle vehical) returns SUV|HighEndCar[] => [
+function tnf7(Vehicle vehical) returns SUV|HighEndCar[] => <HighEndCar[]>[
     {
         year: vehical.year,
         model: {
@@ -93,9 +90,7 @@ function tnf13(int x, string y) returns TypeA|TypeB|TypeC|error => <TypeB1>{
     strB1: 12
 };
 
-function tnf131(int x, string y) returns TypeA|(TypeB|TypeC)[]|TypeB1 => {
-
-};
+function tnf131(int x, string y) returns TypeA|(TypeB|TypeC)[]|TypeB1 => {};
 
 function tnf132(int x, string y) returns TypeA|(TypeB|TypeC)[]|TypeB1 => <(TypeB1|TypeB2|TypeC)[]>[
     {
@@ -118,6 +113,8 @@ function tnf15(int x) returns TypeA|TypeB|TypeC|error => {
 function tnf16(Vehicle vehical) returns (SUV|xml)[] => [];
 
 function tnf17(Vehicle vehical) returns xml[]|TypeA[] => [];
+
+function tnf18(TypeA a) returns anydata[] => [];
 
 type TypeAll TypeA|TypeB;
 
@@ -147,4 +144,3 @@ type TypeC record {
 // 4. Add dissabled search for cases where search is not applicable
 // 5. Add a warning when selecting a type 
 // 6. Reduce the gap between search and the top of the page
-// 7. Create an issue to track displaying all the fields available in the source (including invalid fields)

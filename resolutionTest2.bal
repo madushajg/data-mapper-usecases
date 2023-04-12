@@ -2,42 +2,30 @@ import ballerina/auth;
 import ballerina/email;
 
 function tnf20(Vehicle vehical) returns (SUV|HighEndCar)[] => [
+    <SUV>{
+        model: vehical.model.transmission,
+        year: vehical.year
+    }
+];
+
+function tnf201(Vehicle vehical) returns (SUV|HighEndCar)[] => [
+    {
+        year: 0,
+        model: vehical.model.transmission
+    },
     {
         year: vehical.year,
         model: {
             transmission: "",
             engine: ""
         }
-    },
-    {}
-];
-
-function tnf201(Vehicle vehical) returns (SUV|HighEndCar)[] => [
-    {
-        year: 0,
-        model: vehical.model.engine
-    },
-    <HighEndCar>{
-        year: vehical.year,
-        model: {
-            transmission: "",
-            engine:
-        }
-    },
-    <SUV>{},
-    <SUV>{},
-    <HighEndCar>{}
+    }
 ];
 
 function tnf2011(Vehicle vehical) returns (SUV|HighEndCar)[] => [
-    <SUV>{
-        year: vehical.year,
+    {
+        year: 0,
         model: vehical.model.transmission
-    },
-    <HighEndCar>{
-        model: {
-            transmission: vehical.model.engine
-        }
     }
 ];
 
@@ -46,7 +34,8 @@ function tnf202(Vehicle vehical) returns (SUV[]|HighEndCar[])[] => [
         {
             year: 0,
             model: ""
-        }
+        },
+        {}
     ],
     [
         {
@@ -55,6 +44,15 @@ function tnf202(Vehicle vehical) returns (SUV[]|HighEndCar[])[] => [
                 transmission: vehical.model.transmission,
                 engine: ""
             }
+        }
+    ]
+];
+
+function tnf2021(Vehicle vehical) returns (SUV[]|HighEndCar[])[] => [
+    [
+        {
+            year: ,
+            model: ""
         }
     ]
 ];
@@ -72,13 +70,6 @@ function tnf204(Vehicle vehical) returns (email:Message|HighEndCar[])[] => [
     {
         subject: "",
         to: ""
-    }
-];
-
-function tnf21Temp(Vehicle vehical) returns SUV[] => [
-    {
-        year: 0,
-        model:
     }
 ];
 
@@ -135,15 +126,11 @@ function tnf24(Vehicle vehical) returns (int|SUV)[] => [
     {}
 ];
 
-function name111(Vehicle v) returns HighEndCar => {
-
-};
-
-
-
+function name111(Vehicle v) returns SUV[] => [
+    {},
+    {}
+];
 
 // ######################### Next #########################
-// 1. Enable creating links by clicking on the fields
-// 2. Enable creating links by using the statement editor
-// 3. Investigate on the multiple rerendering issue
-// 4. Improve union type selection on partial elements
+// 1. Investigate on the multiple rerendering issue
+// 2. Improve union type selection on partial elements
