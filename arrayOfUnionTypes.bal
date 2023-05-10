@@ -22,13 +22,6 @@ function tnf201(Vehicle vehical) returns (SUV|HighEndCar)[] => [
     }
 ];
 
-function tnf2011(Vehicle vehical) returns (SUV|HighEndCar)[] => [
-    {
-        year: 0,
-        model: vehical.model.transmission
-    }
-];
-
 function tnf202(Vehicle vehical) returns (SUV[]|HighEndCar[])[] => [
     [
         {
@@ -54,6 +47,13 @@ function tnf2021(Vehicle vehical) returns (SUV[]|HighEndCar[])[] => [
             year: ,
             model: ""
         }
+    ],
+    <HighEndCar[]>[
+        {
+            model: {
+                transmission: vehical.model.engine
+            }
+        }
     ]
 ];
 
@@ -76,19 +76,23 @@ function tnf204(Vehicle vehical) returns (email:Message|HighEndCar[])[] => [
 function tnf21(Vehicle vehical) returns (SUV|HighEndCar)[] => [
     <SUV>{
         year: 0,
-        model:
+        model: vehical.category
     }
 ];
 
 function tnf211(Vehicle vehical) returns (SUV|error)[] => [
     {
         year: 0
-    }
+    },
+    <SUV>{}
 ];
 
 function tnf212(Vehicle vehical) returns SUV?[] => [
     {
         year: 0
+    },
+    <SUV>{
+        year: vehical.price
     }
 ];
 
@@ -100,7 +104,9 @@ function tnf23(Vehicle vehical) returns (email:Options|auth:LdapUserStoreConfig)
         userNameAttribute: "",
         membershipAttribute: "",
         groupNameListFilter: "",
-        groupSearchBase: [],
+        groupSearchBase: [
+            vehical.model.engine
+        ],
         userSearchBase: "",
         groupNameSearchFilter: "",
         userNameListFilter: "",
@@ -123,14 +129,14 @@ function tnf231(Vehicle vehical) returns (email:Options|auth:LdapUserStoreConfig
 
 function tnf24(Vehicle vehical) returns (int|SUV)[] => [
     0,
-    {}
+    <SUV>{}
 ];
 
 function name111(Vehicle v) returns SUV[] => [
+    {},
     {},
     {}
 ];
 
 // ######################### Next #########################
-// 1. Investigate on the multiple rerendering issue
-// 2. Improve union type selection on partial elements
+// 1. Improve union type selection on partial elements

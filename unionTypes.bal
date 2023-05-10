@@ -40,6 +40,9 @@ function tnf6(Vehicle vehical) returns SUV[]|HighEndCar[] => <SUV[]>[
     },
     {
         year: vehical.year
+    },
+    {
+        model: vehical.model.engine
     }
 ];
 
@@ -51,7 +54,8 @@ function tnf7(Vehicle vehical) returns SUV|HighEndCar[] => <HighEndCar[]>[
             transmission: "",
             engine: ""
         }
-    }
+    },
+    {}
 ];
 
 function tnf8(Vehicle vehical) returns HighEndCar[]|HighEndCar[][] => <HighEndCar[][]>[
@@ -61,6 +65,14 @@ function tnf8(Vehicle vehical) returns HighEndCar[]|HighEndCar[][] => <HighEndCa
             model: {
                 transmission: "",
                 engine: ""
+            }
+        },
+        {}
+    ],
+    [
+        {
+            model: {
+                engine: vehical.category
             }
         }
     ]
@@ -138,9 +150,7 @@ type TypeC record {
 };
 
 // ######################### Next #########################
-// 1. Need to handle union type in array
-// 2. Need to handle add type cast for binary expressions
-// 3. Need to handle union types in query expressions
-// 4. Add dissabled search for cases where search is not applicable
-// 5. Add a warning when selecting a type 
-// 6. Reduce the gap between search and the top of the page
+// 1. Need to handle union types in query expressions (at function body level)
+// 2. Need to handle union types in field level
+// 3. Add a warning when selecting a type 
+// 4. Need to handle add type cast for binary expressions
