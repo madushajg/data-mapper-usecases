@@ -102,7 +102,7 @@ function tnf13(int x, string y) returns TypeA|TypeB|TypeC|error => <TypeB1>{
     strB1: 12
 };
 
-function tnf131(int x, string y) returns TypeA|(TypeB|TypeC)[]|TypeB1 => {};
+function tnf131(int x, string y) returns TypeA|(TypeB|TypeC)[]|TypeB1 => {}; // Need to change the expression body accordingly 
 
 function tnf132(int x, string y) returns TypeA|(TypeB|TypeC)[]|TypeB1 => <(TypeB1|TypeB2|TypeC)[]>[
     {
@@ -150,7 +150,7 @@ type TypeC record {
 };
 
 // ######################### Next #########################
-// 1. Need to handle union types in query expressions (at function body level)
-// 2. Need to handle union types in field level
-// 3. Add a warning when selecting a type 
-// 4. Need to handle add type cast for binary expressions
+// 1. Need to handle union types in field level
+// 2. Add a warning when selecting a type 
+// 3. Need to handle add type cast for binary expressions
+// 4. Handle adding select clauses when the return type is an union type
