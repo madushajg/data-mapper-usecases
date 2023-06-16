@@ -44,13 +44,6 @@ function transform2(Vehicle vehical) returns SUV[]|HighEndCar[] => <HighEndCar[]
 
 function transform3(decimal d) returns float|int => <int>d;
 
-function transform4(HighEndCar car) returns Car => {
-    vehicle: <HighEndCar>{
-        year: 0,
-        model: {transmission: "", engine: ""}
-    }
-};
-
 function transform1Simplified(Vehicle vehical) returns HighEndCar => {
     year: vehical.year,
     model: {
