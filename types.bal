@@ -171,9 +171,19 @@ function tnfOther9(TypeA a) returns anydata[] => []; // Need to handle anydata[]
 
 function tnfOther10(T3 t3) returns T5 => {
     t1OrT2s: from var t1sItem in t3.t1s
-        select 
+        select
 }; // Need to fix generating query expressions
 
+function tnfOther11(T3 t3) returns T1[]|T2[] => <T1[]>from var t1sItem in t3.t1s
+    select {
+        str: ""
+    }; // Delete not working
+
+function tnfOther12(Vehicle[] vehical) returns (SUV|HighEndCar)[] => let var newModel = "MX" in from var item in vehical
+        select {
+            year: item.year,
+            model: newModel
+        }; // Not rendering
 
 // ######################### Next #########################
 // 1. Add a warning when re-initializing types
