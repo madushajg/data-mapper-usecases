@@ -169,6 +169,11 @@ function tnfOther8(int x, string y) returns TypeA|(TypeB|TypeC)[]|TypeB1 => {}; 
 
 function tnfOther9(TypeA a) returns anydata[] => []; // Need to handle anydata[]
 
+function tnfOther10(T3 t3) returns T5 => {
+    t1OrT2s: from var t1sItem in t3.t1s
+        select 
+}; // Need to fix generating query expressions
+
 
 // ######################### Next #########################
 // 1. Add a warning when re-initializing types
