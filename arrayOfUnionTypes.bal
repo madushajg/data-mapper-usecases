@@ -1,14 +1,14 @@
 import ballerina/auth;
 import ballerina/email;
 
-function tnf20(Vehicle vehical) returns (SUV|HighEndCar)[] => [
+function tnfUnionArray1(Vehicle vehical) returns (SUV|HighEndCar)[] => [
     <SUV>{
         model: vehical.model.transmission,
         year: vehical.year
     }
 ];
 
-function tnf201(Vehicle vehical) returns (SUV|HighEndCar)[] => [
+function tnfUnionArray2(Vehicle vehical) returns (SUV|HighEndCar)[] => [
     {
         year: 0,
         model: vehical.model.transmission
@@ -22,7 +22,7 @@ function tnf201(Vehicle vehical) returns (SUV|HighEndCar)[] => [
     }
 ];
 
-function tnf202(Vehicle vehical) returns (SUV[]|HighEndCar[])[] => [
+function tnfUnionArray3(Vehicle vehical) returns (SUV[]|HighEndCar[])[] => [
     [
         {
             year: 0,
@@ -41,7 +41,7 @@ function tnf202(Vehicle vehical) returns (SUV[]|HighEndCar[])[] => [
     ]
 ];
 
-function tnf2021(Vehicle vehical) returns (SUV[]|HighEndCar[])[] => [
+function tnfUnionArray4(Vehicle vehical) returns (SUV[]|HighEndCar[])[] => [
     [
         {
             year: ,
@@ -57,7 +57,7 @@ function tnf2021(Vehicle vehical) returns (SUV[]|HighEndCar[])[] => [
     ]
 ];
 
-function tnf203(Vehicle vehical) returns (email:Message[]|HighEndCar[])[] => [
+function tnfUnionArray5(Vehicle vehical) returns (email:Message[]|HighEndCar[])[] => [
     [
         {
             subject: "",
@@ -66,28 +66,28 @@ function tnf203(Vehicle vehical) returns (email:Message[]|HighEndCar[])[] => [
     ]
 ];
 
-function tnf204(Vehicle vehical) returns (email:Message|HighEndCar[])[] => [
+function tnfUnionArray6(Vehicle vehical) returns (email:Message|HighEndCar[])[] => [
     {
         subject: "",
         to: ""
     }
 ];
 
-function tnf21(Vehicle vehical) returns (SUV|HighEndCar)[] => [
+function tnfUnionArray7(Vehicle vehical) returns (SUV|HighEndCar)[] => [
     <SUV>{
         year: 0,
         model: vehical.category
     }
 ];
 
-function tnf211(Vehicle vehical) returns (SUV|error)[] => [
+function tnfUnionArray8(Vehicle vehical) returns (SUV|error)[] => [
     {
         year: 0
     },
     <SUV>{}
 ];
 
-function tnf212(Vehicle vehical) returns SUV?[] => [
+function tnfUnionArray9(Vehicle vehical) returns SUV?[] => [
     {
         year: 0
     },
@@ -96,7 +96,7 @@ function tnf212(Vehicle vehical) returns SUV?[] => [
     }
 ];
 
-function tnf23(Vehicle vehical) returns (email:Options|auth:LdapUserStoreConfig)[] => [
+function tnfUnionArray10(Vehicle vehical) returns (email:Options|auth:LdapUserStoreConfig)[] => [
     {
         userEntryObjectClass: "",
         userNameSearchFilter: "",
@@ -118,7 +118,7 @@ function tnf23(Vehicle vehical) returns (email:Options|auth:LdapUserStoreConfig)
     }
 ];
 
-function tnf231(Vehicle vehical) returns (email:Options|auth:LdapUserStoreConfig)[] => [
+function tnfUnionArray11(Vehicle vehical) returns (email:Options|auth:LdapUserStoreConfig)[] => [
     <auth:LdapUserStoreConfig>{
         userEntryObjectClass: "",
         userNameSearchFilter: "",
@@ -127,12 +127,12 @@ function tnf231(Vehicle vehical) returns (email:Options|auth:LdapUserStoreConfig
     {}
 ];
 
-function tnf24(Vehicle vehical) returns (int|SUV)[] => [
+function tnfUnionArray12(Vehicle vehical) returns (int|SUV)[] => [
     0,
     <SUV>{}
 ];
 
-function name111(Vehicle v) returns SUV[] => [
+function tnfUnionArray13(Vehicle v) returns SUV[] => [
     {},
     {},
     {}
