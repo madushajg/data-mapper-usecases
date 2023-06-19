@@ -2,22 +2,8 @@ import ballerina/auth;
 import ballerina/jwt;
 import ballerina/email;
 
+// Type resolved throuch value expr
 function tnfUnionRoot1(Vehicle vehical) returns SUV|HighEndCar => {
-    model: vehical.category,
-    year: 2019
-};
-
-function tnfUnionRoot2(Vehicle vehical) returns SUV|HighEndCar => <TypeA>{
-    model: vehical.category,
-    year: 1996
-};
-
-function tnfUnionRoot3(Vehicle vehical) returns SUV|HighEndCar => let var var1 = "100" in <SUV>{
-        model: var1
-
-    };
-
-function tnfUnionRoot4(Vehicle vehical) returns SUV|HighEndCar => {
     year: vehical.year,
     model: {
         transmission: vehical.model.transmission,
@@ -25,108 +11,93 @@ function tnfUnionRoot4(Vehicle vehical) returns SUV|HighEndCar => {
     }
 };
 
-function tnfUnionRoot5(Vehicle vehical) returns SUV|HighEndCar => vehical.model;
-
-function tnfUnionRoot6(Vehicle vehical) returns SUV|HighEndCar => <SUV>vehical.model;
-
-function tnfUnionRoot7(Vehicle vehical) returns SUV|HighEndCar => <SUV>{
-    strA: vehical.category
+// Type casted
+function tnfUnionRoot2(Vehicle vehical) returns SUV|HighEndCar => <SUV>{
+    model: vehical.category
 };
 
-function tnfUnionRoot8(Vehicle vehical) returns SUV[]|HighEndCar[] => <SUV[]>[
-    {
-        year: ,
-        model: vehical.model.transmission
-    },
-    {
-        year: vehical.year
-    },
-    {
-        model: vehical.model.engine
-    }
+// Type casted with let expression
+function tnfUnionRoot3(Vehicle vehical) returns SUV|HighEndCar => let var var1 = "100" in <SUV>{
+        model: var1
+    };
+
+// Mapped to the root type
+function tnfUnionRoot4(Vehicle vehical) returns SUV|HighEndCar => vehical.model;
+
+// Union of array types
+function tnfUnionRoot5(Vehicle vehical) returns SUV[]|HighEndCar[] => [
 ];
 
-// When the type is derivable (need to handle adding new elements)
-function tnfUnionRoot9(Vehicle vehical) returns SUV|HighEndCar[] => <HighEndCar[]>[
+// Union of array types, resolved type through value expr (need to handle adding new elements)
+function tnfUnionRoot6(Vehicle vehical) returns SUV|HighEndCar[] => [
     {
         year: vehical.year,
         model: {
             transmission: "",
             engine: ""
         }
-    },
-    {}
+    }
 ];
 
-function tnfUnionRoot10(Vehicle vehical) returns HighEndCar[]|HighEndCar[][] => <HighEndCar[][]>[
-    [
-        {
-            year: vehical.year,
-            model: {
-                transmission: "",
-                engine: ""
-            }
-        },
-        {}
-    ],
-    [
-        {
-            model: {
-                engine: vehical.category
-            }
-        }
-    ]
+// Union of multi-dimentional array types
+function tnfUnionRoot7(Vehicle vehical) returns HighEndCar[]|HighEndCar[][] => [
 ];
 
-function tnfUnionRoot11(int x) returns int|float[] => x; // Shouldn't replace the default value when deleting
+// mapped to root union type, a mix of array and non-array types
+function tnfUnionRoot8(int x) returns int|float[] => x;
 
-function tnfUnionRoot12(int x) returns int|float[] => [
+// mapped to root union type, a mix of array and non-array types, resolved type through expr
+function tnfUnionRoot9(int x) returns int|float[] => [
     x * 1.0,
     0
 ];
 
-function tnfUnionRoot13(int x, int y) returns int|float[] => let var variable = "a" in x + y; // Need to handle add type cast for binary expressions
-
-function tnfUnionRoot14(int x) returns email:Options[]|auth:LdapUserStoreConfig[] => <auth:LdapUserStoreConfig[]>[
+// union types consisting imported array types
+function tnfUnionRoot10(int x) returns email:Options[]|auth:LdapUserStoreConfig[] => [
     {
         connectionName: x
-
     }
 ];
 
-function tnfUnionRoot15(int x) returns email:Options|auth:LdapUserStoreConfig => <email:Options>{
-    sender: x
+// union types consisting imported types, type resolved through value expr
+function tnfUnionRoot11(int x) returns email:Options|auth:LdapUserStoreConfig => {
+
+    htmlBody: "",
+    contentType: "",
+    headers: {},
+    cc: <string>"",
+    bcc: <string>"",
+    replyTo: <string>"",
+    attachments: <email:Attachment>{
+        filePath: "",
+        contentType: ""
+    },
+    sender: ""
 };
 
-function tnfUnionRoot16(int x, string y) returns TypeA|TypeB|TypeC|error => <TypeB1>{
-    strB1: 12
+// multiple union types incluting types which are inner union type, type resolved through value expr
+function tnfUnionRoot12(int x, string y) returns TypeA|TypeB|TypeC|error => {
+    strB1: "12"
 };
 
-function tnfUnionRoot17(int x, string y) returns TypeA|(TypeB|TypeC)[]|TypeB1 => {}; // Need to change the expression body accordingly 
-
-function tnfUnionRoot18(int x, string y) returns TypeA|(TypeB|TypeC)[]|TypeB1 => <(TypeB1|TypeB2|TypeC)[]>[
-    {
-        strB1: ""
-    },
-    {
-        strC: ""
-    },
-
-    <TypeB1>{},
-    <TypeB2>{}
+// multiple union type consist of array types
+function tnfUnionRoot13(int x, string y) returns TypeA[]|(TypeB|TypeC)[]|TypeB1 => <(TypeB1|TypeB2|TypeC)[]>[
 ];
 
-function tnfUnionRoot19(TypeA typeA) returns TypeA|TypeB|TypeC|error => typeA.tb1;
+// mapped to root union type, resolved type through expr
+function tnfUnionRoot14(TypeA typeA) returns TypeA|TypeB|TypeC|error => typeA.tb1;
 
-function tnfUnionRoot20(int x) returns TypeA|TypeB|TypeC|error => {
+// mapped to root union type, resolved type through expr
+function tnfUnionRoot15(int x) returns TypeA|TypeB|TypeC|error => {
     strB1: x.toString()
 };
 
-function tnfUnionRoot21(Vehicle vehical) returns (SUV|xml)[] => [];
+// unsupported union type array
+function tnfUnionRoot16(Vehicle vehical) returns (SUV|xml)[] => [];
 
-function tnfUnionRoot22(Vehicle vehical) returns xml[]|TypeA[] => [];
+// unsupported arrays of union types
 
-function tnfUnionRoot23(TypeA a) returns anydata[] => [];
+function tnfUnionRoot17(Vehicle vehical) returns xml[]|TypeA[] => [];
 
-// ######################### Next #########################
-// 1. Add a warning when re-initializing types
+// amydate typed output
+function tnfUnionRoot18(TypeA a) returns anydata => {};

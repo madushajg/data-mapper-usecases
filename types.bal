@@ -158,3 +158,18 @@ function tnfOther5(Vehicle vehical) returns HighEndCar[] => <HighEndCar[]>[
     },
     {}
 ];
+
+function tnfOther6(Vehicle vehical) returns SUV|HighEndCar => <SUV>{
+    strA: vehical.category
+}; // strA is unavailable field, need to indicate this in the diagram
+
+function tnfOther7(int x, int y) returns int|float[] => let var variable = "a" in x + y; // Need to handle add type cast for binary expressions
+
+function tnfOther8(int x, string y) returns TypeA|(TypeB|TypeC)[]|TypeB1 => {}; // Need to change the expression body accordingly 
+
+function tnfOther9(TypeA a) returns anydata[] => []; // Need to handle anydata[]
+
+
+// ######################### Next #########################
+// 1. Add a warning when re-initializing types
+
