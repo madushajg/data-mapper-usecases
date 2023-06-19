@@ -1,13 +1,15 @@
 import ballerina/auth;
 import ballerina/email;
 
+// array of union types, type resolved through value expression
 function tnfUnionArray1(Vehicle vehical) returns (SUV|HighEndCar)[] => [
-    <SUV>{
+    {
         model: vehical.model.transmission,
         year: vehical.year
     }
 ];
 
+// array of union types, type resolved through value expression
 function tnfUnionArray2(Vehicle vehical) returns (SUV|HighEndCar)[] => [
     {
         year: 0,
@@ -22,8 +24,9 @@ function tnfUnionArray2(Vehicle vehical) returns (SUV|HighEndCar)[] => [
     }
 ];
 
+// array of union types which are arrays, type resolved via casting and via value expression
 function tnfUnionArray3(Vehicle vehical) returns (SUV[]|HighEndCar[])[] => [
-    [
+    <SUV[]>[
         {
             year: 0,
             model: ""
@@ -41,22 +44,11 @@ function tnfUnionArray3(Vehicle vehical) returns (SUV[]|HighEndCar[])[] => [
     ]
 ];
 
+// array of union types which are arrays, the value is empty
 function tnfUnionArray4(Vehicle vehical) returns (SUV[]|HighEndCar[])[] => [
-    [
-        {
-            year: ,
-            model: ""
-        }
-    ],
-    <HighEndCar[]>[
-        {
-            model: {
-                transmission: vehical.model.engine
-            }
-        }
-    ]
 ];
 
+// array of union types which are arrays (imported types), type is resolved through value expression
 function tnfUnionArray5(Vehicle vehical) returns (email:Message[]|HighEndCar[])[] => [
     [
         {
@@ -66,6 +58,7 @@ function tnfUnionArray5(Vehicle vehical) returns (email:Message[]|HighEndCar[])[
     ]
 ];
 
+// array of union types which consists of array and record type (imported)
 function tnfUnionArray6(Vehicle vehical) returns (email:Message|HighEndCar[])[] => [
     {
         subject: "",
@@ -73,29 +66,24 @@ function tnfUnionArray6(Vehicle vehical) returns (email:Message|HighEndCar[])[] 
     }
 ];
 
+// array of union types, type resolved via type casting
 function tnfUnionArray7(Vehicle vehical) returns (SUV|HighEndCar)[] => [
     <SUV>{
-        year: 0,
-        model: vehical.category
+        year: 0
     }
 ];
 
+// array of union types, type narrowed to single type
 function tnfUnionArray8(Vehicle vehical) returns (SUV|error)[] => [
-    {
-        year: 0
-    },
-    <SUV>{}
+    {}
 ];
 
+// optional type array, type narrowed to single type
 function tnfUnionArray9(Vehicle vehical) returns SUV?[] => [
-    {
-        year: 0
-    },
-    <SUV>{
-        year: vehical.price
-    }
+    {}
 ];
 
+// array of imported union types, type resolved via value expression
 function tnfUnionArray10(Vehicle vehical) returns (email:Options|auth:LdapUserStoreConfig)[] => [
     {
         userEntryObjectClass: "",
@@ -118,6 +106,7 @@ function tnfUnionArray10(Vehicle vehical) returns (email:Options|auth:LdapUserSt
     }
 ];
 
+// array of imported union types, type resolved via type casting and via value expression
 function tnfUnionArray11(Vehicle vehical) returns (email:Options|auth:LdapUserStoreConfig)[] => [
     <auth:LdapUserStoreConfig>{
         userEntryObjectClass: "",
@@ -127,16 +116,13 @@ function tnfUnionArray11(Vehicle vehical) returns (email:Options|auth:LdapUserSt
     {}
 ];
 
+// array of imported union types consist of primitive type
 function tnfUnionArray12(Vehicle vehical) returns (int|SUV)[] => [
     0,
     <SUV>{}
 ];
 
+// regular array typed output
 function tnfUnionArray13(Vehicle v) returns SUV[] => [
-    {},
-    {},
-    {}
-];
 
-// ######################### Next #########################
-// 1. Improve union type selection on partial elements
+];

@@ -172,4 +172,4 @@ function tnfOther9(TypeA a) returns anydata[] => []; // Need to handle anydata[]
 
 // ######################### Next #########################
 // 1. Add a warning when re-initializing types
-
+// 2. Improve union type selection on partial elements
