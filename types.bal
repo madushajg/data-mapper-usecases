@@ -14,6 +14,12 @@ type CovidPatient record {|
     TempertureReading[] tempReadings;
 |};
 
+type CovidPatientTemp record {|
+    string name;
+    int age;
+    TempertureReading[][] tempReadings;
+|};
+
 type TempertureReading record {|
     string date;
     decimal temperature;
