@@ -13,12 +13,12 @@ function record3D2Record2D(CovidEntry[][][] ce) returns CovidEntry[][][] => from
         select from var ceItemItemItem in ceItemItem
             select {
                 iso_code: ceItemItemItem.iso_code,
-                country: ,
-                cases: ,
-                deaths: ,
-                recovered: ,
+                country: "",
+                cases: 0,
+                deaths: 0,
+                recovered: 0,
                 active: ceItemItemItem.active,
-                daily_cases:
+                daily_cases: []
             };
 
 function string2D2Record2D(string[][] patient) returns record {string[][] arr;} => {
@@ -34,6 +34,8 @@ function recordInner2D2RecordInner2D(CovidPatientTemp patient) returns CovidPati
             select {
                 date: tempReadingsItemItem.date,
                 temperature: tempReadingsItemItem.temperature
-            }
+            },
+    name: "",
+    age: 0
 
 };

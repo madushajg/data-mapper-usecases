@@ -1,7 +1,7 @@
 
 function CovidPatient2CovidPatient(CovidPatient[] patient) returns CovidPatient[] => from var patientItem in patient
     select {
-        name: patientItem.name,
+        name: patientItem.name + " " + patientItem.age,
         age: patientItem.age,
         tempReadings: from var tempReadingsItem in patientItem.tempReadings
             select {

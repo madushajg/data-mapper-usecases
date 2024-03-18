@@ -3,7 +3,7 @@ public type CovidEntry record {|
     string country;
     int cases;
     int deaths;
-    int recovered;
+    float recovered;
     int active;
     int[] daily_cases;
 |};
@@ -26,5 +26,6 @@ type TempertureReading record {|
 |};
 
 type Summary record {
-    int totalDeaths;
+    float totalDeaths;
+    int recovered;
 };
