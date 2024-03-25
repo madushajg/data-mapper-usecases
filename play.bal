@@ -1,3 +1,5 @@
+import ballerina/http;
+
 type Person record {
     string id;
     string firstName;
@@ -29,6 +31,16 @@ type Person record {
     int[] noOfCourses;
     string[] courseIds;
     string[] courseNames;
+};
+
+type Person2 record {
+    string id;
+    string firstName;
+    string lastName;
+    int age;
+    string country;
+    string visaType;
+    float gpa;
 };
 
 type Course record {
@@ -73,6 +85,19 @@ type Student record {
     boolean isGraduated;
 };
 
-function transform(Person person, Course[] courses) returns Student => {
-    id: person.courseNames
+function transform(Person person, Course courses) returns Student => {
+    visaType: person.firstName + person.address
+    age: courses.id,
+    courseNames: from var courseIdsItem in person.courseIds
+        select "",
+    hasEducation: person.isStudent
 };
+
+function transform2(Person person, Course courses) returns Student => {
+};
+
+function transform3(Person person, Course[] courses) returns Student[] => [];
+
+function transform4(Person person) returns Student => let var variable = "aa" in {
+
+    };
